@@ -22,12 +22,12 @@ client_scripts {
 }
 
 client_scripts {
-    'client/cl.lua',
+    'client/client.lua',
     'config.lua'
 }
 
 server_scripts {
-    'server/srv.lua',
+    'server/server.lua',
     'config.lua'
 }
 
