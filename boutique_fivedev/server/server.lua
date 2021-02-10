@@ -4,8 +4,9 @@ TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
 RegisterServerEvent("boutique:getpoints")
 AddEventHandler("boutique:getpoints", function()
+	local xPlayer = ESX.GetPlayerFromId(source)
+	if xPlayer ~= nil then
 	local _source = source
-    local xPlayer = ESX.GetPlayerFromId(source)
     if id_system_l_o_s == "steam" then
     license = xPlayer.getIdentifier()
     elseif id_system_l_o_s == "license" then
@@ -17,6 +18,7 @@ AddEventHandler("boutique:getpoints", function()
 		local poi = data[1].fivecoin
 		TriggerClientEvent('boutique:retupoints', _source, poi)
 	end)
+end
 end)
 
 RegisterCommand("givedonate", function(source, args, raw)
@@ -51,18 +53,21 @@ end, false)
 RegisterServerEvent('shop:vehicule')
 AddEventHandler('shop:vehicule', function(vehicleProps, plate_625)
     local xPlayer = ESX.GetPlayerFromId(source)
+	if xPlayer ~= nil then
     MySQL.Async.execute('INSERT INTO owned_vehicles (owner, plate, vehicle) VALUES (@owner, @plate, @vehicle)', {
         ['@owner']   = xPlayer.identifier,
         ['@plate']   = plate_625,
         ['@vehicle'] = json.encode(vehicleProps)
     }, function(rowsChange)
     end)
+end
 end)
 
 RegisterServerEvent('boutique:deltniop')
 AddEventHandler('boutique:deltniop', function(point)
-    local _source = source
     local xPlayer = ESX.GetPlayerFromId(source)
+	if xPlayer ~= nil then
+	local _source = source
     if id_system_l_o_s == "steam" then
         license = xPlayer.getIdentifier()
     elseif id_system_l_o_s == "license" then
@@ -80,14 +85,17 @@ AddEventHandler('boutique:deltniop', function(point)
         }, function(rowsChange)
         end)
     end)
+end
 end)
 
 
 RegisterServerEvent('give:money')
 AddEventHandler('give:money', function(w)
-    local _source = source
-    local xPlayer = ESX.GetPlayerFromId(_source)
+    local xPlayer = ESX.GetPlayerFromId(source)
+	if xPlayer ~= nil then
+	local _source = source
     xPlayer.addMoney(w)
+end
 end)
 
 -------------------------------- Armes
